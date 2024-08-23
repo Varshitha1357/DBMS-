@@ -206,3 +206,97 @@ EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO	DEPTNO	DNAME	LOC
 7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30	30	SALES	CHICAGO
 7934	MILLER	CLERK	7782	23-JAN-82	1300	 - 	10	10	ACCOUNTING	NEW YORK
 
+//14) Display distinct job from emp table.
+
+code:
+select distinct job 
+from emp
+
+o/p:
+JOB
+ANALYST
+CLERK
+SALESMAN
+MANAGER
+PRESIDENT
+
+//16) Write a query to display the employee name, department name of all employees who earn a
+commission
+
+code:
+select emp.ename,dept.dname
+from emp
+join dept on emp.deptno= dept.deptno
+where emp.comm is not null;
+
+o/p:
+ENAME	DNAME
+ALLEN	SALES
+WARD	SALES
+MARTIN	SALES
+
+//19) Display all the departments where employee salary greater than average salary of that
+department.
+
+code:
+select distinct dept.dname
+from emp 
+join dept on emp.deptno = dept.deptno
+where emp.sal>(
+    select avg(sal)
+    from emp e
+    where emp.deptno= emp.deptno
+);
+
+o/p:
+DNAME
+RESEARCH
+SALES
+ACCOUNTING
+
+//20) Display employees where length of ename is 5
+
+code:
+ select*
+from emp
+where length(ename) = 5;
+
+o/p:
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+7369	SMITH	CLERK	7902	17-DEC-80	800	 - 	20
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7876	ADAMS	CLERK	7788	13-JUL-87	1100	 - 	20
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+
+//21) Display all employees where ename start with J and ends with S
+
+code:
+select*
+from emp
+where ename like 'J%S';
+
+o/p:
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+
+//22) Display all employees where employee does not belong to 10,20,40
+
+code:
+select*
+from emp
+where deptno not in (10,20,40);
+
+o/p:
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	 - 	30
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
